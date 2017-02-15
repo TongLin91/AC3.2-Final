@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 import AVKit
-import AVFoundation
+//import AVFoundation
 import MobileCoreServices
 import Firebase
 
@@ -26,6 +26,10 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         setupViewHierarchy()
         configureConstraints()
     }
+
+    func showImagePicker(){
+        showImagePickerForSourceType(sourceType: .photoLibrary)
+    }
     
     func showImagePickerForSourceType(sourceType: UIImagePickerControllerSourceType) {
         
@@ -40,10 +44,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         imagePickerController.mediaTypes = [String(kUTTypeImage)]
         
         self.present(imagePickerController, animated: true, completion: nil)
-    }
-
-    func showImagePicker(){
-        showImagePickerForSourceType(sourceType: .photoLibrary)
     }
     
     func uploadingImage(sender: UIBarButtonItem){
@@ -146,8 +146,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         alert.addAction(ok)
         self.present(alert, animated: true, completion: completion)
     }
-    
-    
 
     //MARK: - Lazy inits
     lazy var selectedImage: UIImageView = {

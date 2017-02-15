@@ -66,11 +66,14 @@ class LogInViewController: UIViewController {
         let feedViewC = FeedViewController()
         let uploadViewC = UploadViewController()
         
-        let feedIcon = UITabBarItem(title: "Feed", image: UIImage(named: "chickenleg"), selectedImage: UIImage(named: "chickenleg"))
-        let uploadIcon = UITabBarItem(title: "Upload", image: UIImage(named: "upload"), selectedImage: UIImage(named: "upload"))
+        let feedImage = UIImage(named: "chickenleg")
+        let uploadImage = UIImage(named: "upload")
         
-        feedIcon.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -10, right: 0)
-        uploadIcon.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -10, right: 0)
+        let feedIcon = UITabBarItem(title: "Feed", image: feedImage, selectedImage: feedImage)
+        let uploadIcon = UITabBarItem(title: "Upload", image: uploadImage, selectedImage: uploadImage)
+        
+        feedIcon.imageInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        uploadIcon.imageInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         feedViewC.tabBarItem = feedIcon
         uploadViewC.tabBarItem = uploadIcon
         
@@ -79,7 +82,13 @@ class LogInViewController: UIViewController {
         tabBarController.viewControllers = [UINavigationController(rootViewController: feedViewC), UINavigationController(rootViewController: uploadViewC)]
         tabBarController.selectedIndex = 0
         
-        self.present(tabBarController, animated: true, completion: nil)
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromBottom
+        view.window!.layer.add(transition, forKey: kCATransition)
+        
+        self.present(tabBarController, animated: false, completion: nil)
     }
     
     func loginTapped(){
@@ -146,6 +155,7 @@ class LogInViewController: UIViewController {
     lazy var usernameTextField: UITextField = {
         let view = UITextField()
         view.placeholder = "Email..."
+        view.text = "tong@tong.com"
         view.borderStyle = .roundedRect
         view.backgroundColor = .lightGray
         return view
@@ -154,6 +164,7 @@ class LogInViewController: UIViewController {
     lazy var passwordTextField: UITextField = {
         let view = UITextField()
         view.placeholder = "Password"
+        view.text = "000000"
         view.borderStyle = .roundedRect
         view.backgroundColor = .lightGray
         return view
